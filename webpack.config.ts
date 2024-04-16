@@ -18,22 +18,8 @@ const config: webpack.Configuration = {
   module: {
     rules: [
       {
-        test: /\.css$/,
-        exclude: /node_modules/,
-        use: [
-          { loader: MiniCssExtractPlugin.loader },
-          { loader: '@teamsupercell/typings-for-css-modules-loader' },
-          {
-            loader: 'css-loader',
-            options: {
-              importLoaders: 1,
-              modules: {
-                localIdentName: '[local]--[hash:base64]',
-              },
-            },
-          },
-          { loader: 'postcss-loader' },
-        ]
+        test: /\.css$/i,
+        use: ['style-loader', 'css-loader'],
       },
       {
         test: /\.tsx?$/,
