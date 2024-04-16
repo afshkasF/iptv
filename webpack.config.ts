@@ -43,7 +43,7 @@ const config: webpack.Configuration = {
     ],
   },
   resolve: {
-    extensions: ['.tsx', '.ts', '.js'],
+    extensions: ['.tsx', '.ts', '.js', '.jsx'],
     modules: [SRC_DIR, 'node_modules']
   },
   plugins: [miniCssExtractPlugin],
