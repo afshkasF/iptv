@@ -1,0 +1,11 @@
+v: 0
+micros:
+  - name: iptv
+    engine: static
+    src: ./
+    serve: ./dist
+    commands:
+      - npm install
+      - npm run clean
+      - npm run build
+    public: false

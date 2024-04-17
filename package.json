@@ -2,7 +2,10 @@
   "name": "iptv",
   "version": "0.0.0",
   "scripts": {
-    "build": "npx dotenv webpack"
+    "clean": "rimraf ./dist",
+    "start": "http-server ./dist",
+    "build": "dotenv -e ./.production.env webpack",
+    "build:dev": "dotenv -e ./.development.env webpack"
   },
   "author": "Maksim Kuzmin",
   "license": "MIT",
@@ -16,15 +19,20 @@
     "autoprefixer": "^10.4.19",
     "css-loader": "^7.1.1",
     "dotenv-cli": "^7.4.1",
+    "html-webpack-plugin": "^5.6.0",
     "mini-css-extract-plugin": "^2.8.1",
     "postcss-loader": "^8.1.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "rimraf": "^5.0.5",
     "style-loader": "^4.0.0",
     "ts-loader": "^9.5.1",
     "ts-node": "^10.9.2",
     "typescript": "^5.4.5",
     "webpack": "^5.91.0",
     "webpack-cli": "^5.1.4"
+  },
+  "dependencies": {
+    "http-server": "^14.1.1"
   }
 }
