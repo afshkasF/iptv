@@ -2,8 +2,6 @@ import React from "react";
 import { Card } from '@blueprintjs/core'
 import { M3uMedia } from "m3u-parser-generator";
 
-import './channel.scss'
-
 export interface ChannelProp {
   media: M3uMedia;
   onClick(media: M3uMedia): void;
