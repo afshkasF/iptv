@@ -2,12 +2,13 @@ import React from 'react'
 import { M3uPlaylist, M3uMedia } from 'm3u-parser-generator'
 import { Grid, GridCellProps } from 'react-virtualized'
 
+import { useResizeObserver } from '$/hooks/use-resize-observer'
+
 import { Channel } from '../channel/channel'
 
-const WIDTH = 800
-const HEIGHT = 600
-const COLUMNS_COUNT = 5
-const COLUMN_WIDTH = WIDTH / COLUMNS_COUNT
+import './channels.scss'
+
+const COLUMN_WIDTH_MIN = 200
 const ROW_HEIGHT = 80
 const SCROLL_WIDTH = 23
 
@@ -19,12 +20,17 @@ export interface ChannelsProps {
 export const Channels: React.FC<ChannelsProps> = (props) => {
   const { playlist, onChange } = props;
 
+  const { ref: targetRef, width, height } = useResizeObserver<HTMLDivElement>()
+
   const handleClick = (media: M3uMedia): void => {
     onChange?.(media);
   }
 
+  const columnsCount = Math.floor(width / COLUMN_WIDTH_MIN)
+  const columnWidth = (width - SCROLL_WIDTH) / columnsCount
+
   const cellRenderer = (props: GridCellProps) => {
-    const index = props.rowIndex * COLUMNS_COUNT + props.columnIndex
+    const index = props.rowIndex * columnsCount + props.columnIndex
     if (index >= playlist.medias.length) {
       return null;
     }
@@ -45,14 +51,18 @@ export const Channels: React.FC<ChannelsProps> = (props) => {
   }
 
   return (
-    <Grid
-      width={WIDTH + SCROLL_WIDTH}
-      height={HEIGHT}
-      columnWidth={COLUMN_WIDTH}
-      rowHeight={ROW_HEIGHT}
-      columnCount={COLUMNS_COUNT}
-      rowCount={playlist.medias.length / COLUMNS_COUNT}
-      cellRenderer={cellRenderer}
-    />
+    <div className='channels'>
+      <div ref={targetRef} className='channels__grid-container'>
+        <Grid
+          width={width}
+          height={height}
+          columnWidth={columnWidth}
+          rowHeight={ROW_HEIGHT}
+          columnCount={columnsCount}
+          rowCount={playlist.medias.length / columnsCount}
+          cellRenderer={cellRenderer}
+        />
+      </div>
+    </div>
   )
 }

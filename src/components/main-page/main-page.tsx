@@ -85,12 +85,12 @@ export const MainPage: React.FC<MainPageProps> = (props) => {
         onPlaylistAdd={handlePlaylistAdd}
         onPlaylistRemove={onPlaylistRemove}
       />
+      {parsedPlaylist && <Channels playlist={parsedPlaylist} onChange={handleChannelChange}/>}
       <AddPlaylistDialog
         isOpen={isOpen}
         onOk={handleAddPlaylistOk}
         onCancel={handleAddPlaylistCancel}
       />
-      {parsedPlaylist && <Channels playlist={parsedPlaylist} onChange={handleChannelChange}/>}
     </div>
   )
 }
