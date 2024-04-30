@@ -1,7 +1,17 @@
 .channels {
-  position: relative;
+  display: flex;
+  flex-direction: column;
+
+  &__search {
+
+  }
 
   &__grid-container {
+    position: relative;
+    height: 100%;
+  }
+
+  &__grid-resizer {
     position: absolute;
     width: 100%;
     height: 100%;
