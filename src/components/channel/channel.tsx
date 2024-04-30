@@ -1,5 +1,5 @@
 import React from "react";
-import { Card } from '@blueprintjs/core'
+import { Card, Icon } from '@blueprintjs/core'
 import { M3uMedia } from "m3u-parser-generator";
 
 import './channel.scss'
@@ -13,16 +13,19 @@ export interface ChannelProp {
 export const Channel: React.FC<ChannelProp> = (props) => {
   const { media, style, onClick } = props;
 
+  const logoSrc = media.attributes['tvg-logo']
+
   const handleClick = () => {
     onClick(media);
   }
 
   return (
     <Card className='channel' interactive compact style={style} onClick={handleClick}>
-      <div>
-        <img src={media.attributes['tvg-logo']} style={{ width: '24px', height: '24px' }}></img>
-        <span>{media.name}</span>
-      </div>
+      {logoSrc &&
+        <img className='channel__logo' src={logoSrc}></img> ||
+        <Icon icon='help' size={64}/>
+      }
+      <div className='channel__name'>{media.name}</div>
     </Card>
   )
 }

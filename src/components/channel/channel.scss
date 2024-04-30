@@ -1,3 +1,22 @@
 .channel {
-  margin: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+
+  margin-top: 10px;
+  margin-bottom: 10px;
+
+  &__logo {
+    width: 64px;
+    height: 64px;
+  }
+
+  &__name {
+    white-space: nowrap;
+    width: 180px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 }

@@ -8,8 +8,9 @@ import { Channel } from '../channel/channel'
 
 import './channels.scss'
 
-const COLUMN_WIDTH_MIN = 200
-const ROW_HEIGHT = 80
+const COLUMN_WIDTH = 200
+const COLUMNS_GAP_MIN = 20
+const ROW_HEIGHT = 150
 const SCROLL_WIDTH = 23
 
 export interface ChannelsProps {
@@ -26,7 +27,7 @@ export const Channels: React.FC<ChannelsProps> = (props) => {
     onChange?.(media);
   }
 
-  const columnsCount = Math.floor(width / COLUMN_WIDTH_MIN)
+  const columnsCount = Math.floor((width - SCROLL_WIDTH) / (COLUMN_WIDTH + COLUMNS_GAP_MIN))
   const columnWidth = (width - SCROLL_WIDTH) / columnsCount
 
   const cellRenderer = (props: GridCellProps) => {
@@ -35,10 +36,13 @@ export const Channels: React.FC<ChannelsProps> = (props) => {
       return null;
     }
     const media = playlist.medias[index]
+    const horizontalMargin = Math.floor((columnWidth - COLUMN_WIDTH) / 2)
     const style = {
       ...props.style,
-      width: `calc(${props.style.width}px - 20px)`,
-      height: `calc(${props.style.height}px - 20px)`
+      width: COLUMN_WIDTH,
+      height: `calc(${props.style.height}px - 20px)`,
+      marginLeft: `${horizontalMargin}px`,
+      marginRight: `${horizontalMargin}px`,
     }
     return (
       <Channel
