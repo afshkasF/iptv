@@ -6,7 +6,7 @@ import '@blueprintjs/core/lib/css/blueprint.css'
 export interface ButtonProps extends React.PropsWithChildren {
   className?: string
   intent?: Intent
-  onClick(): void
+  onClick?(): void
 }
 
 export const Button: React.FC<ButtonProps> = (props) => {

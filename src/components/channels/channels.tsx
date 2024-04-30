@@ -2,11 +2,12 @@ import React, { useMemo, useState } from 'react'
 import { M3uPlaylist, M3uMedia } from 'm3u-parser-generator'
 import { Grid, GridCellProps } from 'react-virtualized'
 import cn from 'classnames'
+import { Icon, InputGroup } from '@blueprintjs/core'
 
 import { useResizeObserver } from '$/hooks/use-resize-observer'
 
+import { Button } from '../button/button'
 import { Channel } from '../channel/channel'
-import { TextBox } from '../textbox/textbox'
 
 import './channels.scss'
 
@@ -70,7 +71,12 @@ export const Channels: React.FC<ChannelsProps> = (props) => {
 
   return (
     <div className={cn('channels', className)}>
-      <TextBox value={query} placeholder='Enter channel name' onChange={setQuery}/>
+      <InputGroup
+        value={query}
+        placeholder='Enter channel name'
+        rightElement={<Button><Icon icon='search'/></Button>}
+        onValueChange={setQuery}
+      />
       <div className='channels__grid-container'>
         <div ref={targetRef} className='channels__grid-resizer'>
           {columnsCount > 0 &&
