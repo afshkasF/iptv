@@ -15,6 +15,10 @@
       grid-column: 6;
       grid-row: 2;
     }
+
+    &__channels {
+      display: none;
+    }
   }
 
   @media (width > 1300px) {
@@ -29,12 +33,15 @@
     &__channels-button {
       display: none;
     }
+
+    &__channels {
+      grid-column: 4;
+      grid-row: 2;
+    }
   }
 
-  &__channels {
+  &__drawer-channels {
     height: 100%;
-    grid-column: 4;
-    grid-row: 2;
   }
 
   &__channels-button {

@@ -58,13 +58,16 @@ export const PlayerPage: React.FC<PlayerPageProps> = (props) => {
     navigate(url.toString().substring(url.origin.length))
   }
 
-  const channelsElement =
-    playlist && <Channels
-      className='player-page__channels'
-      playlist={playlist}
-      selected={media}
-      onChange={handleChannelChange}
-    />
+  const renderChannels = (className: string) => {
+    return (
+      playlist && <Channels
+        className={className}
+        playlist={playlist}
+        selected={media}
+        onChange={handleChannelChange}
+      />
+    )
+  }
 
   return (
     <div className='player-page'>
@@ -80,9 +83,9 @@ export const PlayerPage: React.FC<PlayerPageProps> = (props) => {
         isOpen={channelsIsOpen}
         onClose={handleToggleChannelsIsOpen}
       >
-        {channelsIsOpen && channelsElement}
+        {channelsIsOpen && renderChannels('player-page__drawer-channels')}
       </Drawer>
-      {!channelsIsOpen && channelsElement}
+      {!channelsIsOpen && renderChannels('player-page__channels')}
     </div>
   )
 }
