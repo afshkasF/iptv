@@ -1,12 +1,14 @@
 import React, { useMemo, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { MediaPlayer, MediaProvider } from '@vidstack/react'
 import { PlyrLayout, plyrLayoutIcons } from '@vidstack/react/player/layouts/plyr'
-import { M3uParser } from 'm3u-parser-generator'
-import { DialogBody, Drawer, Icon } from '@blueprintjs/core'
+import { M3uMedia, M3uParser } from 'm3u-parser-generator'
+import { Drawer, Icon } from '@blueprintjs/core'
 
 import '@vidstack/react/player/styles/base.css'
 import '@vidstack/react/player/styles/plyr/theme.css'
 
+import { ROUTES } from '$/consts/routes'
 import { QUERY_PARAMETERS } from '$/consts/query-parameters'
 import { PlaylistData } from '$/domain/playlist-data'
 import { useQuery } from '$/hooks/use-query'
@@ -22,6 +24,8 @@ export interface PlayerPageProps {
 
 export const PlayerPage: React.FC<PlayerPageProps> = (props) => {
   const { playlists } = props
+
+  const navigate = useNavigate()
 
   const playlistId = useQuery(QUERY_PARAMETERS.PLAYLIST_ID)
   const channelId = useQuery(QUERY_PARAMETERS.CHANNEL_ID)
@@ -42,7 +46,16 @@ export const PlayerPage: React.FC<PlayerPageProps> = (props) => {
     setChannelsIsOpen(!channelsIsOpen)
   }
 
-  const handleChannelChange = (): void => {
+  const handleChannelChange = (media: M3uMedia): void => {
+    const channelId = media.attributes['tvg-id']
+    if (!playlistId || !channelId) {
+      return;
+    }
+    const url = new URL(window.location.origin)
+    url.pathname = ROUTES.PLAYER
+    url.searchParams.set(QUERY_PARAMETERS.PLAYLIST_ID, playlistId)
+    url.searchParams.set(QUERY_PARAMETERS.CHANNEL_ID, channelId)
+    navigate(url.toString().substring(url.origin.length))
   }
 
   const channelsElement =
