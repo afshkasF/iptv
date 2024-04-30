@@ -5,6 +5,8 @@ import { Button } from '../button/button'
 import { Label } from '../label/label'
 import { TextBox } from '../textbox/textbox'
 
+import './add-playlist-dialog.scss'
+
 export interface AddPlaylistDialogProps {
   isOpen: boolean
   onOk(name: string, url: string): void;
@@ -34,17 +36,25 @@ export const AddPlaylistDialog: React.FC<AddPlaylistDialogProps> = (props) => {
 
   return (
     <Dialog className='bp5-dark' isOpen={isOpen} onClose={handleCancel}>
-      <DialogBody>
-        <Label text='Name:' inline>
-          <TextBox value={name} onChange={setName}></TextBox>
-        </Label>
-        <Label text='URL:' inline>
-          <TextBox value={url} onChange={setUrl}></TextBox>
-        </Label>
+      <DialogBody className='add-playlist-dialog__body'>
+        <Label text='Name:' htmlFor='playlist-name' inline/>
+        <TextBox
+          id='playlist-name'
+          value={name}
+          placeholder='Publicly available IPTV'
+          onChange={setName}
+        />
+        <Label text='URL:' htmlFor='playlist-url' inline/>
+        <TextBox
+          id='playlist-url'
+          value={url}
+          placeholder='https://iptv-org.github.io/iptv/index.m3u'
+          onChange={setUrl}
+        />
       </DialogBody>
       <DialogFooter actions={
         <>
-          <Button onClick={handleOkClick}>Ok</Button>
+          <Button intent='primary' onClick={handleOkClick}>Ok</Button>
           <Button onClick={handleCancel}>Cancel</Button>
         </>
       }>
