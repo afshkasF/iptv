@@ -18,7 +18,7 @@
   }
 
   @media (width > 1300px) {
-    grid-template-columns: 30px 1040px auto;
+    grid-template-columns: 30px 1040px 30px auto;
     grid-template-rows: 30px auto 30px;
 
     &__player {
@@ -33,7 +33,7 @@
 
   &__channels {
     height: 100%;
-    grid-column: 3;
+    grid-column: 4;
     grid-row: 2;
   }
 
