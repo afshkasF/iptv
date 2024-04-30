@@ -2,6 +2,8 @@ import path from 'path'
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
+import { reactVirtualized } from './config/react-virtualized-plugin'
+
 export default defineConfig({
   clearScreen: false,
   resolve: {
@@ -15,5 +17,5 @@ export default defineConfig({
   preview: {
     port: 8081
   },
-  plugins: [react()],
+  plugins: [react(), reactVirtualized()],
 })
