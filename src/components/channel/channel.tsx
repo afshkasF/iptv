@@ -6,12 +6,13 @@ import './channel.scss'
 
 export interface ChannelProp {
   media: M3uMedia;
+  selected?: boolean
   style?: React.CSSProperties;
   onClick(media: M3uMedia): void;
 }
 
 export const Channel: React.FC<ChannelProp> = (props) => {
-  const { media, style, onClick } = props;
+  const { media, selected, style, onClick } = props;
 
   const logoSrc = media.attributes['tvg-logo']
 
@@ -20,7 +21,14 @@ export const Channel: React.FC<ChannelProp> = (props) => {
   }
 
   return (
-    <Card className='channel' interactive compact style={style} onClick={handleClick}>
+    <Card
+      className='channel'
+      interactive
+      compact
+      selected={selected}
+      style={style}
+      onClick={handleClick}
+    >
       {logoSrc &&
         <img className='channel__logo' src={logoSrc}></img> ||
         <Icon icon='help' size={64}/>
