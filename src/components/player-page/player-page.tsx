@@ -79,7 +79,6 @@ export const PlayerPage: React.FC<PlayerPageProps> = (props) => {
         <Icon icon='double-chevron-left'/>
       </Button>
       <Drawer
-        className='bp5-dark'
         isOpen={channelsIsOpen}
         onClose={handleToggleChannelsIsOpen}
       >

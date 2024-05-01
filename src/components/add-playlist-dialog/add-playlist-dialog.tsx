@@ -35,7 +35,7 @@ export const AddPlaylistDialog: React.FC<AddPlaylistDialogProps> = (props) => {
   }
 
   return (
-    <Dialog className='bp5-dark' isOpen={isOpen} onClose={handleCancel}>
+    <Dialog isOpen={isOpen} onClose={handleCancel}>
       <DialogBody className='add-playlist-dialog__body'>
         <Label text='Name:' htmlFor='playlist-name' inline/>
         <TextBox
